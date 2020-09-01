@@ -90,8 +90,8 @@ def main():
     # print('reuse mem now ...')
     # ================================================
 
-    args.unrolled = True
-
+    args.unrolled = True #when True optimize step is on alfa and w
+                        # if False optimization is only on w, ordinary backprop, after pruning
 
     logging.info('GPU device = %d' % args.gpu)
     logging.info("args = %s", args)
@@ -235,5 +235,11 @@ def infer(valid_queue, model, criterion):
     return top1.avg, losses.avg
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  #TODO learning: why is this always used
     main()
+
+# git status
+# cd path-to-git-repository
+# git add .
+# git commit -m "explain what did you add"
+# git push origin master(branch name)
