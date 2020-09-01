@@ -1,7 +1,7 @@
 import  os,sys,time, glob
 import  numpy as np
 import  torch
-import  utils
+import  utils, prune
 import  logging
 import  argparse
 import  torch.nn as nn
@@ -165,7 +165,7 @@ def train(train_queue, valid_queue, model, arch, criterion, optimizer, lr):
     losses = utils.AverageMeter()
     top1 = utils.AverageMeter()
     top5 = utils.AverageMeter()
-
+    # model = prune.snip_darts(model)
     valid_iter = iter(valid_queue)
 
     for step, (x, target) in enumerate(train_queue):
