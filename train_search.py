@@ -146,7 +146,12 @@ def main():
 #I don't know if we need scheduler like this, maybe set all the fancy settings to zero?
 
     arch = Arch(model, args)
+    # TODO: how to call minibatches on snip ? do we need one minibatch or more? if so how many?
+    # for (inputs_snip_batch, labels_snip_batch) in enumerate(train_queue):
+    #     inputs_snip_batch, labels_snip_batch = inputs_snip_batch.to(device), labels_snip_batch.cuda(non_blocking=True)
+    #     model = prune.snip(model, snip_train_queue)
 
+    #TODO learning: what is epoch?
     for epoch in range(args.epochs):
 
         scheduler.step()
@@ -185,9 +190,12 @@ def train(train_queue, valid_queue, model, arch, criterion, optimizer, lr):
     losses = utils.AverageMeter()
     top1 = utils.AverageMeter()
     top5 = utils.AverageMeter()
-    # model = prune.snip_darts(model)
+
     valid_iter = iter(valid_queue)
 
+    # step is a counter which starts from 0 to the number of tuples in train_quit other than that has no relation to train_queue
+    # (x, target) are the tuple
+    #TODO: is (x, target) a single data point of a minibatch or is it all the data points of a minibatch
     for step, (x, target) in enumerate(train_queue):
 
         batchsz = x.size(0)
@@ -197,6 +205,8 @@ def train(train_queue, valid_queue, model, arch, criterion, optimizer, lr):
         x, target = x.to(device), target.cuda(non_blocking=True)
         x_search, target_search = next(valid_iter) # [b, 3, 32, 32], [b]
         x_search, target_search = x_search.to(device), target_search.cuda(non_blocking=True)
+        # x : train_data , target : train_labels
+        # x_search : validation_data, target_search : validation_labels
 
         # 1. update alpha
         arch.step(x, target, x_search, target_search, lr, optimizer, unrolled=args.unrolled)

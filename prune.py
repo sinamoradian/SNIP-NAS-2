@@ -6,7 +6,7 @@ import torch.nn.utils.prune as prune
 import torch.nn.functional as F
 from torch import autograd
 
-snip_darts(model, inputs, labels):
+snip(model, inputs, labels):
     criterion = nn.CrossEntropyLoss()
     outputs = model.forward(inputs)
     loss = criterion(outputs, labels)
