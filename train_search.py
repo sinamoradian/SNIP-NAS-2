@@ -19,6 +19,7 @@ from    arch import Arch
 parser = argparse.ArgumentParser("cifar")
 parser.add_argument('--data', type=str, default='../data', help='location of the data corpus')
 parser.add_argument('--batchsz', type=int, default=64, help='batch size')
+parser.add_argument('--snipbatchsz', type=int, default=16, help='snip batch size')
 parser.add_argument('--lr', type=float, default=0.025, help='init learning rate')
 parser.add_argument('--lr_min', type=float, default=0.001, help='min learning rate')
 parser.add_argument('--momentum', type=float, default=0.9, help='momentum')
@@ -124,6 +125,25 @@ def main():
 
     scheduler = optim.lr_scheduler.CosineAnnealingLR(
                     optimizer, float(args.epochs), eta_min=args.lr_min)
+
+#create similar queues for snip function
+    snip_train_queue = torch.utils.data.DataLoader(
+        train_data, batch_size=args.snipbatchsz,
+        sampler=torch.utils.data.sampler.SubsetRandomSampler(indices[:split]),
+        pin_memory=True, num_workers=2)
+
+    snip_valid_queue = torch.utils.data.DataLoader(
+        train_data, batch_size=args.snipbatchsz,
+        sampler=torch.utils.data.sampler.SubsetRandomSampler(indices[split:]),
+        pin_memory=True, num_workers=2)
+
+        #we don't need the validation set queue but I don't want to break anything
+        #TODO remove it later
+
+    snip_scheduler = optim.lr_scheduler.CosineAnnealingLR(
+                    optimizer, float(args.epochs), eta_min=args.lr_min)
+
+#I don't know if we need scheduler like this, maybe set all the fancy settings to zero?
 
     arch = Arch(model, args)
 
