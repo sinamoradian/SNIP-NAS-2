@@ -14,6 +14,13 @@ from torch import autograd
 #We wrote this version of the code for calculating sensitivity (using SNIP's criteria)
 #and then pruning weights and biases
 #this code was written for and tested with LeNet
+
+#Goals for this script:
+#1- This code was originally created for single input. Update it to handle a mini batch
+#2- figure out how to prune weights, biases, and alphas at the same time. Can the alphas?
+#how did DARTS do this?
+
+
 def snip(model, inputs, labels):
     criterion = nn.CrossEntropyLoss()
     outputs = model.forward(inputs)
