@@ -6,7 +6,15 @@ import torch.nn.utils.prune as prune
 import torch.nn.functional as F
 from torch import autograd
 
-snip(model, inputs, labels):
+
+#This script prunes neural network using sensitivity function described in SNIP
+#for a given neural network (for now) this script prunes the X% weights and "alphas"
+#with least sensitivity
+
+#We wrote this version of the code for calculating sensitivity (using SNIP's criteria)
+#and then pruning weights and biases
+#this code was written for and tested with LeNet
+def snip(model, inputs, labels):
     criterion = nn.CrossEntropyLoss()
     outputs = model.forward(inputs)
     loss = criterion(outputs, labels)
