@@ -20,7 +20,7 @@ from torch import autograd
 #2- figure out how to prune weights, biases, and alphas at the same time. Can the alphas?
 #how did DARTS do this?
 
-
+#1.a I'm going to use pytorch's 60 minute tutorial as a sandbox
 def snip(model, inputs, labels):
     criterion = nn.CrossEntropyLoss()
     outputs = model.forward(inputs)
