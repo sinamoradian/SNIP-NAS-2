@@ -22,18 +22,58 @@ from torch import autograd
 #2- figure out how to prune weights, biases, and alphas at the same time. Can the alphas?
 #how did DARTS do this?
 
+
+
+
+
+
 def snip(model, inputs, labels):
+
+
+    #I want to use CIFAR-10 with LeNET
+#download CIFAR-10
+    transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+    trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+                                        download=True, transform=transform)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=16,
+                                          shuffle=True, num_workers=2)
+
+    testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+                                       download=True, transform=transform)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=4,
+                                         shuffle=False, num_workers=2)
+
+
+#do we have to know the classes beforehand?
+    classes = ('plane', 'car', 'bird', 'cat',
+           'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
+    dataiter = iter(testloader)
+    images, labels = dataiter.next() #I'm not sure if I need to have requires_grad=True
+    model.zero_grad()
     criterion = nn.CrossEntropyLoss()
-    outputs = model.forward(inputs)
+#optimizer.zero_grad()
+    outputs = model(images)
     loss = criterion(outputs, labels)
 
-    gradients = autograd.grad(loss, model.parameters()) #Sina: I think autograd.grad calculates the grads but doesn't save it in the model.grad attribute
+    criterion = nn.CrossEntropyLoss()
+    outputs = model.forward(inputs)
+    #should gradients be zeroed out here?
+    loss = criterion(outputs, labels)
+
+    #Sina: I think autograd.grad calculates the grads but doesn't save it in the model.grad attribute
     abs_gradients = [None] * len(gradients)
-    sigma_gradients = torch.zeros(len(gradients)) #initialize sigma_gradients as a tesnor with correct size. values of the tensor don't matter
+    gradients = autograd.grad(loss, model.parameters())
+    #initialize sigma_gradients as a tesnor with correct size. values of the tensor don't matter
+    sigma_gradients = torch.zeros(len(gradients))
 
     for i in range(0, len(gradients)):
       abs_gradients[i] = torch.abs(gradients[i])
       sigma_gradients[i] = torch.sum(abs_gradients[i])
+
     sigma_sigma_gradients = torch.sum(sigma_gradients) #calc sum of all layers
 
     #calculate sensitivity by dividing the gradients with sum of gradients
