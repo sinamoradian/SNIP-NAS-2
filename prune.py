@@ -17,10 +17,11 @@ from torch import autograd
 
 #Goals for this script:
 #1- This code was originally created for single input. Update it to handle a mini batch
+#It can already handle minibatch. CrossEntropyLoss is designed with minibatch in mind.
+
 #2- figure out how to prune weights, biases, and alphas at the same time. Can the alphas?
 #how did DARTS do this?
 
-#1.a I'm going to use pytorch's 60 minute tutorial as a sandbox
 def snip(model, inputs, labels):
     criterion = nn.CrossEntropyLoss()
     outputs = model.forward(inputs)
