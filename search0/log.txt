@@ -1,0 +1,18 @@
+2020-09-08 19:16:32,823 GPU device = 0
+2020-09-08 19:16:32,823 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 19:17:16,790 GPU device = 0
+2020-09-08 19:17:48,270 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 19:18:20,056 GPU device = 0
+2020-09-08 19:18:26,376 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 19:26:22,682 GPU device = 0
+2020-09-08 19:26:26,034 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 19:34:58,377 Total param size = 1.930842 MB
+2020-09-08 22:09:46,981 GPU device = 0
+2020-09-08 22:09:47,554 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 22:10:10,176 Total param size = 1.930842 MB
+2020-09-08 23:34:50,809 GPU device = 0
+2020-09-08 23:34:51,389 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 23:34:55,699 Total param size = 1.930842 MB
+2020-09-08 23:40:05,605 GPU device = 0
+2020-09-08 23:40:05,605 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-09-08 23:40:06,845 Total param size = 1.930842 MB

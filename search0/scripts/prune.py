@@ -4,7 +4,6 @@ import torch
 from torch import nn
 import torch.nn.utils.prune as prune
 import torch.nn.functional as F
-import torchvision
 from torch import autograd
 
 
@@ -32,14 +31,13 @@ def snip(model, inputs, labels):
 
 
     #I want to use CIFAR-10 with LeNET
-    #download CIFAR-10 ; CIFAR-10 is downloaded to the data folder by line 110 in main() of train_search.py
-    transform = torchvision.transforms.Compose(
-    [torchvision.transforms.ToTensor(),
-     torchvision.transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+#download CIFAR-10
+    transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
     trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
                                         download=True, transform=transform)
-    # why don't we ever use trainLoader?
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=16,
                                           shuffle=True, num_workers=2)
 
@@ -67,9 +65,8 @@ def snip(model, inputs, labels):
     loss = criterion(outputs, labels)
 
     #Sina: I think autograd.grad calculates the grads but doesn't save it in the model.grad attribute
-    gradients = autograd.grad(loss, model.parameters())
     abs_gradients = [None] * len(gradients)
-
+    gradients = autograd.grad(loss, model.parameters())
     #initialize sigma_gradients as a tesnor with correct size. values of the tensor don't matter
     sigma_gradients = torch.zeros(len(gradients))
 
