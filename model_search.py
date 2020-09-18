@@ -216,6 +216,10 @@ class Network(nn.Module):
         # this kind of implementation will add alpha into self.parameters()
         # it has num k of alpha parameters, and each alpha shape: [num_ops]
         # it requires grad and can be converted to cpu/gpu automatically
+        """ in order to decouple the alfas should add a third dymention of size self.layers
+        self.alpha_normal = nn.Parameter(torch.randn(self.layers, k, num_ops))
+        self.alpha_reduce = nn.Parameter(torch.randn(self.layers, k, num_ops))
+        """
         self.alpha_normal = nn.Parameter(torch.randn(k, num_ops))
         self.alpha_reduce = nn.Parameter(torch.randn(k, num_ops))
         with torch.no_grad():
