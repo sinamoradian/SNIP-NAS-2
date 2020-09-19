@@ -30,6 +30,9 @@ from torch import autograd
 
 def snip(model, inputs, labels):
 
+    #Sina here I present alphas shape : two dimenssion matrix of size (k=14, num_ops=8)
+    alphas = model.arch_parameters()
+
 
     #I want to use CIFAR-10 with LeNET
     #download CIFAR-10 ; CIFAR-10 is downloaded to the data folder by line 110 in main() of train_search.py
