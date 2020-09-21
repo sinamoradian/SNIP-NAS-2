@@ -53,17 +53,65 @@ def load_data_for sinp():
     images, labels = dataiter.next() #I'm not sure if I need to have requires_grad=True
     return images, labels
 
+# TODO: this function is based on LeNET must be changed for DARTS architecture
+def print_sparsity_info(model):
+    print(
+        "Sparsity in conv1.weight: {:.2f}%".format(
+            100. * float(torch.sum(model.conv1.weight == 0))
+            / float(model.conv1.weight.nelement())
+        )
+    )
+    print(
+        "Sparsity in conv2.weight: {:.2f}%".format(
+            100. * float(torch.sum(model.conv2.weight == 0))
+            / float(model.conv2.weight.nelement())
+        )
+    )
+    print(
+        "Sparsity in fc1.weight: {:.2f}%".format(
+            100. * float(torch.sum(model.fc1.weight == 0))
+            / float(model.fc1.weight.nelement())
+        )
+    )
+    print(
+        "Sparsity in fc2.weight: {:.2f}%".format(
+            100. * float(torch.sum(model.fc2.weight == 0))
+            / float(model.fc2.weight.nelement())
+        )
+    )
+    print(
+        "Sparsity in fc3.weight: {:.2f}%".format(
+            100. * float(torch.sum(model.fc3.weight == 0))
+            / float(model.fc3.weight.nelement())
+        )
+    )
+    print(
+        "Global sparsity: {:.2f}%".format(
+            100. * float(
+                torch.sum(model.conv1.weight == 0)
+                + torch.sum(model.conv2.weight == 0)
+                + torch.sum(model.fc1.weight == 0)
+                + torch.sum(model.fc2.weight == 0)
+                + torch.sum(model.fc3.weight == 0)
+            )
+            / float(
+                model.conv1.weight.nelement()
+                + model.conv2.weight.nelement()
+                + model.fc1.weight.nelement()
+                + model.fc2.weight.nelement()
+                + model.fc3.weight.nelement()
+            )
+        )
+    )
+
+
 def snip(model, inputs, labels):
 
     #alphas of the initial model with shape : two dimenssion matrix of size (k=14, num_ops=8)
     alphas = model.arch_parameters()
-
-
     model.zero_grad()
     criterion = nn.CrossEntropyLoss()
     #optimizer.zero_grad()
-    outputs = model(images)
-    loss = criterion(outputs, labels)
 
     outputs = model.forward(inputs)
     #should gradients be zeroed out here?
@@ -123,53 +171,6 @@ def snip(model, inputs, labels):
         amount=0.35, #what is amount exactly? is it the total portion of weights that are pruned?
     )
 
-    print(
-        "Sparsity in conv1.weight: {:.2f}%".format(
-            100. * float(torch.sum(model.conv1.weight == 0))
-            / float(model.conv1.weight.nelement())
-        )
-    )
-    print(
-        "Sparsity in conv2.weight: {:.2f}%".format(
-            100. * float(torch.sum(model.conv2.weight == 0))
-            / float(model.conv2.weight.nelement())
-        )
-    )
-    print(
-        "Sparsity in fc1.weight: {:.2f}%".format(
-            100. * float(torch.sum(model.fc1.weight == 0))
-            / float(model.fc1.weight.nelement())
-        )
-    )
-    print(
-        "Sparsity in fc2.weight: {:.2f}%".format(
-            100. * float(torch.sum(model.fc2.weight == 0))
-            / float(model.fc2.weight.nelement())
-        )
-    )
-    print(
-        "Sparsity in fc3.weight: {:.2f}%".format(
-            100. * float(torch.sum(model.fc3.weight == 0))
-            / float(model.fc3.weight.nelement())
-        )
-    )
-    print(
-        "Global sparsity: {:.2f}%".format(
-            100. * float(
-                torch.sum(model.conv1.weight == 0)
-                + torch.sum(model.conv2.weight == 0)
-                + torch.sum(model.fc1.weight == 0)
-                + torch.sum(model.fc2.weight == 0)
-                + torch.sum(model.fc3.weight == 0)
-            )
-            / float(
-                model.conv1.weight.nelement()
-                + model.conv2.weight.nelement()
-                + model.fc1.weight.nelement()
-                + model.fc2.weight.nelement()
-                + model.fc3.weight.nelement()
-            )
-        )
-    )
+    print_sparsity_info(model)
 
     return model
