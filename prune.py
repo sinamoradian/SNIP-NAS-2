@@ -24,15 +24,9 @@ from torch import autograd
 #how did DARTS do this?
 
 
-
-
-
-
-def snip(model, inputs, labels):
-
-    #Sina here I present alphas shape : two dimenssion matrix of size (k=14, num_ops=8)
-    alphas = model.arch_parameters()
-
+# removed the code that Sina wrote for loading input and labels to snip functiona
+# TODO: Check if we need to call this function for our minibatches or are the changes in train_search enough?
+def load_data_for sinp():
 
     #I want to use CIFAR-10 with LeNET
     #download CIFAR-10 ; CIFAR-10 is downloaded to the data folder by line 110 in main() of train_search.py
@@ -51,20 +45,26 @@ def snip(model, inputs, labels):
     testloader = torch.utils.data.DataLoader(testset, batch_size=4,
                                          shuffle=False, num_workers=2)
 
-
-#do we have to know the classes beforehand?
+    #do we have to know the classes beforehand?
     classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
     dataiter = iter(testloader)
     images, labels = dataiter.next() #I'm not sure if I need to have requires_grad=True
+    return images, labels
+
+def snip(model, inputs, labels):
+
+    #alphas of the initial model with shape : two dimenssion matrix of size (k=14, num_ops=8)
+    alphas = model.arch_parameters()
+
+
     model.zero_grad()
     criterion = nn.CrossEntropyLoss()
-#optimizer.zero_grad()
+    #optimizer.zero_grad()
     outputs = model(images)
     loss = criterion(outputs, labels)
 
-    criterion = nn.CrossEntropyLoss()
     outputs = model.forward(inputs)
     #should gradients be zeroed out here?
     loss = criterion(outputs, labels)
