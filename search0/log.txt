@@ -16,3 +16,15 @@
 2020-09-08 23:40:05,605 GPU device = 0
 2020-09-08 23:40:05,605 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
 2020-09-08 23:40:06,845 Total param size = 1.930842 MB
+2020-10-06 17:13:06,002 GPU device = 0
+2020-10-06 17:13:09,404 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-10-06 17:13:35,523 Total param size = 1.930842 MB
+2020-10-06 17:15:42,293 GPU device = 0
+2020-10-06 17:15:42,293 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-10-06 17:15:43,008 Total param size = 1.930842 MB
+2020-10-06 17:17:17,267 GPU device = 0
+2020-10-06 17:17:17,267 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-10-06 17:17:17,968 Total param size = 1.930842 MB
+2020-10-06 17:17:33,363 GPU device = 0
+2020-10-06 17:17:33,364 args = Namespace(arch_lr=0.0003, arch_wd=0.001, batchsz=64, cutout=False, cutout_len=16, data='../data', drop_path_prob=0.3, epochs=50, exp_path='search0', gpu=0, grad_clip=5, init_ch=16, layers=8, lr=0.025, lr_min=0.001, model_path='saved_models', momentum=0.9, report_freq=50, seed=2, snipbatchsz=16, train_portion=0.5, unrolled=True, wd=0.0003)
+2020-10-06 17:17:34,166 Total param size = 1.930842 MB

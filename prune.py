@@ -26,7 +26,7 @@ from torch import autograd
 
 # removed the code that Sina wrote for loading input and labels to snip functiona
 # TODO: Check if we need to call this function for our minibatches or are the changes in train_search enough?
-def load_data_for sinp():
+def load_data_for_sinp():
 
     #I want to use CIFAR-10 with LeNET
     #download CIFAR-10 ; CIFAR-10 is downloaded to the data folder by line 110 in main() of train_search.py
@@ -155,8 +155,8 @@ def snip(model, inputs, labels):
       f.data.sub_(f.grad.data * learning_rate)
     # I wonder if I can just directly upload the gradients to weights instead of using this method
 
+# TODO: The parameters to prune should be based on DARTS architecture not LeNet
 #model = LeNet()
-
     parameters_to_prune = (
         (model.conv1, 'weight'),
         (model.conv2, 'weight'),
@@ -168,7 +168,7 @@ def snip(model, inputs, labels):
     prune.global_unstructured(
         parameters_to_prune,
         pruning_method=prune.L1Unstructured,
-        amount=0.35, #what is amount exactly? is it the total portion of weights that are pruned?
+        amount=0.35,
     )
 
     print_sparsity_info(model)

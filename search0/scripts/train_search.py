@@ -130,12 +130,12 @@ def main():
     snip_train_queue = torch.utils.data.DataLoader(
         train_data, batch_size=args.snipbatchsz,
         sampler=torch.utils.data.sampler.SubsetRandomSampler(indices[:split]),
-        pin_memory=True, num_workers=2)
+        pin_memory=True, num_workers=2) #for runing on a pc should be one
 
     snip_valid_queue = torch.utils.data.DataLoader(
         train_data, batch_size=args.snipbatchsz,
         sampler=torch.utils.data.sampler.SubsetRandomSampler(indices[split:]),
-        pin_memory=True, num_workers=2)
+        pin_memory=True, num_workers=2) #for runing on a pc should be one
 
         #we don't need the validation set queue but I don't want to break anything
         #TODO remove it later
@@ -147,9 +147,9 @@ def main():
 
     arch = Arch(model, args)
     # TODO: how to call minibatches on snip ? do we need one minibatch or more? if so how many?
-    # for (inputs_snip_batch, labels_snip_batch) in enumerate(train_queue):
-    #     inputs_snip_batch, labels_snip_batch = inputs_snip_batch.to(device), labels_snip_batch.cuda(non_blocking=True)
-    #     model = prune.snip(model, snip_train_queue)
+    for (inputs_snip_batch, labels_snip_batch) in enumerate(train_queue):
+        inputs_snip_batch, labels_snip_batch = inputs_snip_batch.to(device), labels_snip_batch.cuda(non_blocking=True)
+        model = prune.snip(model, inputs_snip_batch, labels_snip_batch)
 
     #TODO learning: what is epoch?
     for epoch in range(args.epochs):
